@@ -35,7 +35,7 @@ class BloodyParallax {
     }
 
     queryElements() {
-        this.elements = document.querySelectorAll("[data-depth]");
+        this.elements = document.querySelectorAll("[data-bloody-depth]");
         TweenMax.set("[data-depth]", { x: 0, y: 0, force3D: true });
     }
 
@@ -48,7 +48,7 @@ class BloodyParallax {
         let mOffset = this.getMouseMovement();
         this.elements.forEach((element) => {
             let sOffset = this.getScrollMovement(element);
-            let depth = element.getAttribute("data-depth");
+            let depth = element.getAttribute("data-bloody-depth");
             let target = { x: mOffset.x * depth, y: mOffset.y * depth + sOffset * depth};
             TweenMax.set(element, { x: target.x + "px", y: target.y + "px", force3D: true });
         });
