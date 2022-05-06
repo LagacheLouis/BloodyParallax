@@ -8,7 +8,7 @@ npm install @llagache/bloody-parallax
 ### Example :
 index.js : 
 ```javascript
-import Seedable from "@llagache/bloody-parallax";
+import BloodyParallax from "@llagache/bloody-parallax";
 const parallax = new BloodyParallax({mouseIntensity: 0.2, scrollIntensity: 0.5, damping: 0.1, attribute: "data-depth"});
 ```
 index.html : 
