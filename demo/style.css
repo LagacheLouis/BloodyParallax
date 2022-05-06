@@ -1,0 +1,35 @@
+body{
+    margin :0;
+    overflow-x: hidden;
+    background-color: black;
+    width: 100vw;
+  }
+  p{
+    margin: 0;
+    width: 100vw;
+    text-align :center;
+    z-index: 1000;
+    font-family: 'Permanent Marker', cursive;
+    color: white;
+    font-size: 20px;
+    position: relative;
+    z-index: 100000;
+    margin: 0 auto;
+    padding: 100px 20px;
+    max-width: 500px;
+  }
+  
+  
+  
+  .bubble{
+    position: absolute;
+  }
+  .bubble>div{
+    width: 100px;
+    height:100px;
+    border-radius: 50%;
+    border: 1px solid rgb(255,0,43);
+    background-repeat: no-repeat;
+    background-position: 10px -10px;
+  }
+  

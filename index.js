@@ -21,11 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-class BloodyParallax {
-    constructor(scrollIntensity, mouseIntensity, smoothing) {
+export default class BloodyParallax {
+    constructor({ scrollIntensity, mouseIntensity, damping, attribute}) {
         this.scrollIntensity = scrollIntensity;
         this.mouseIntensity = mouseIntensity;
-        this.smoothing = smoothing;
+        this.damping = damping;
+        this.attribute = attribute || "data-depth";
+        this.attributeTag = `[${this.attribute}]`;
         this.mouse = { x: -1, y: -1 };
         this.scrollTop = window.scrollY + window.innerHeight/2;
         this.currentTop = window.scrollY + window.innerHeight/2;
@@ -48,32 +50,30 @@ class BloodyParallax {
 
     getScrollMovement(element) {
         let rect = element.getBoundingClientRect();
-        let posY = rect.top + rect.height/2 + window.scrollY - element._gsTransform.y;
+        let posY = rect.top + rect.height/2 + window.scrollY;
         return (posY - this.currentTop) * this.scrollIntensity;
     }
 
     getMouseMovement() {
-
         return { x: -this.currentDelta.x * this.mouseIntensity, y: -this.currentDelta.y * this.mouseIntensity };
     }
 
     queryElements() {
-        this.elements = document.querySelectorAll("[data-bloody-depth]");
-        TweenMax.set("[data-depth]", { x: 0, y: 0, force3D: true });
+        this.elements = document.querySelectorAll(this.attributeTag);
     }
 
     update() {
 
-        this.currentDelta.x += (this.mouseDelta.x - this.currentDelta.x) * this.smoothing;
-        this.currentDelta.y += (this.mouseDelta.y - this.currentDelta.y) * this.smoothing;
-        this.currentTop += (this.scrollTop - this.currentTop) * this.smoothing;
+        this.currentDelta.x += (this.mouseDelta.x - this.currentDelta.x) * this.damping;
+        this.currentDelta.y += (this.mouseDelta.y - this.currentDelta.y) * this.damping;
+        this.currentTop += (this.scrollTop - this.currentTop) * this.damping;
 
         let mOffset = this.getMouseMovement();
         this.elements.forEach((element) => {
             let sOffset = this.getScrollMovement(element);
-            let depth = element.getAttribute("data-bloody-depth");
+            let depth = element.getAttribute(this.attribute);
             let target = { x: mOffset.x * depth, y: mOffset.y * depth + sOffset * depth};
-            TweenMax.set(element, { x: target.x + "px", y: target.y + "px", force3D: true });
+            element.style.transform = `translate3d(${target.x}px, ${target.y}px, 0px)`;
         });
 
         requestAnimationFrame(() => {
