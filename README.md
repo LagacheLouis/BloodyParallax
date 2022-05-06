@@ -9,7 +9,12 @@ npm install @llagache/bloody-parallax
 index.js : 
 ```javascript
 import BloodyParallax from "@llagache/bloody-parallax";
-const parallax = new BloodyParallax({mouseIntensity: 0.2, scrollIntensity: 0.5, damping: 0.1, attribute: "data-depth"});
+const parallax = new BloodyParallax({
+    mouseIntensity: 0.2, 
+    scrollIntensity: 0.5, 
+    damping: 0.1, 
+    attribute: "data-depth"
+});
 ```
 index.html : 
 ```html
@@ -25,7 +30,12 @@ index.html :
  *   {string} attribute : "data-depth"
  * }
  */
-new BloodyParallax(seed)
+new BloodyParallax({ 
+    scrollIntensity, 
+    mouseIntensity, 
+    damping, 
+    attribute
+})
 ```
 ### Methods :
 ```javascript
