@@ -16,7 +16,7 @@ body{
     color: white;
     font-size: 20px;
     position: relative;
-    z-index: 100000;
+    z-index: 90;
     margin: 0 auto;
     padding: 100px 20px;
     max-width: 700px;
@@ -39,11 +39,12 @@ body{
     backface-visibility: hidden;
   }
   .bubble>div{
-    width: 100px;
-    height:100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 1px solid rgb(255,0,43);
     background-repeat: no-repeat;
     background-position: 10px -10px;
+    box-shadow: black -20px 20px 50px;
   }
   
