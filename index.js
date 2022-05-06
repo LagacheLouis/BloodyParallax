@@ -48,9 +48,19 @@ export default class BloodyParallax {
         this.update();
     }
 
+    isElementInViewport (element) {
+        const r = element.getBoundingClientRect();
+        const top = r.top;
+        const bottom = top + r.height;
+        return (
+            bottom >= 0 &&
+            top <= (window.innerHeight || document.documentElement.clientHeight)
+        )
+    }
+
     getScrollMovement(element) {
-        let rect = element.getBoundingClientRect();
-        let posY = rect.top + rect.height/2 + window.scrollY;
+        const r = element.getBoundingClientRect();
+        const posY = r.top + r.height/2 + window.scrollY - element._parallax.target.y;
         return (posY - this.currentTop) * this.scrollIntensity;
     }
 
@@ -60,6 +70,9 @@ export default class BloodyParallax {
 
     queryElements() {
         this.elements = document.querySelectorAll(this.attributeTag);
+        this.elements.forEach((element) => {
+            element._parallax = { target: {x: 0, y: 0} };
+        });
     }
 
     update() {
@@ -72,8 +85,13 @@ export default class BloodyParallax {
         this.elements.forEach((element) => {
             let sOffset = this.getScrollMovement(element);
             let depth = element.getAttribute(this.attribute);
-            let target = { x: mOffset.x * depth, y: mOffset.y * depth + sOffset * depth};
-            element.style.transform = `translate3d(${target.x}px, ${target.y}px, 0px)`;
+            let target = { x: Math.floor(mOffset.x * depth), y: Math.floor(mOffset.y * depth + sOffset * depth)};
+            element._parallax = { target };
+
+            if(this.isElementInViewport(element)){
+                element.style.transform = `translate3d(${target.x}px, ${target.y}px, 0px)`;
+            }
+         
         });
 
         requestAnimationFrame(() => {

@@ -20,7 +20,7 @@ window.onload = () => {
         wrapper.style.zIndex = `${Math.floor(zIndex * 100)}`;
         
         inner.style.background = `radial-gradient(rgba(255,0,43,${zIndex}), black 50px) no-repeat 10px -10px, black`;
-        inner.style.transform = `scale(${size})`;
+       // inner.style.transform = `scale(${size})`;
 
 
         wrapper.setAttribute("data-depth",zIndex);

@@ -1,6 +1,6 @@
 {
   "name": "@llagache/bloody-parallax",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A quick to setup Javascript ES6 Parallax Library",
   "main": "index.js",
   "scripts": {
